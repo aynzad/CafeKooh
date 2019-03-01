@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/app.css">
+    <title>Cafe Kooh</title>
+</head>
+
+<body>
+    <div class="intro">
+        <div id="mf" class="ip"></div>
+        <div id="mb" class="ip"></div>
+        <div id="tf" class="ip"></div>
+        <div id="tb" class="ip"></div>
+        <div id="logo">
+            <img src="assets/images/logo.png" alt="">
+            <h1>کافه کوه</h1>
+            <h3>فراتر از کافه، بالاتر از شهر</h3>
+        </div>
+    </div>
+    <div id="main">
+        <div class="container">
+            <div class="gallery">
+                <div class="right">
+                    <div class="item">
+                        <img src="assets/images/pic1.png" alt="">
+                    </div>
+                </div>
+                <div class="left">
+                    <div class="item">
+                        <img src="assets/images/pic2.png" alt="">
+                    </div>
+                    <a class="btn" href="#">
+                        مشاهده گالری &larr;
+                    </a>
+                </div>
+            </div>
+            <div class="about">
+                <p>
+                    <h2>درباره کافه کوه:</h2>
+                    <b>کافه کوه</b> اولین گام برای درست کردن چای انتخاب نوع آن است. اگر شما میل به نوشیدن چای سیاه و
+                    قوی دارید شاید نمونه‌های مناسب و شناخته شده آن چای ارل‌گری و دارجیلینگ باشند. دارجلینگ نوعی چایی
+                    باکیفیت است، اما ارل‌گری محصول بریتانیایی است که چای سیاه را از طریق روغن برگ‌های برگاموت (ترنج)
+                    تهیه می‌شود و دارای بو و عطری منحصر به فرد است ده‌ها نوع "چای" میوه‌ای و گیاهی نیز وجود دارند که
+                    افراد به دلیل مختلفی.
+                </p>
+            </div>
+            <div class="footer"><a href="http://gonjeshk.ir"><div class="love">❤️</div>، علیرضا اصفهانی</a></div>
+        </div>
+    </div>
+</body>
+<script>
+    window.onscroll = function () {
+        onScrollEvent()
+    };
+    var windowsHeight = window.innerHeight;
+    var windowsWidth = window.innerWidth;
+    console.log( 'windowsHeight: ', windowsHeight );
+    console.log( 'windowsWidth: ', windowsWidth );
+    var cov = windowsWidth * 100 / 1440;
+    console.log( 'cov: ', cov );
+    onScrollEvent( true )
+
+    function animateLayer( layerId, initialOffset, speed ) {
+        var offset = ( initialOffset * cov / 100 ) + ( parseInt( window.scrollY + 1 ) * speed );
+        document.getElementById( layerId ).style.bottom = offset + "px";
+    }
+
+    function animateMain( layerId, initialOffset, speed ) {
+        var offset = initialOffset - ( parseInt( window.scrollY + 1 ) * speed );
+        if ( window.scrollY > windowsHeight / 3 ) {
+            var opacity = Math.min( ( window.scrollY - windowsHeight / 3 ) / 1.5, 100 );
+            document.getElementById( layerId ).style.opacity = opacity / 100;
+        } else {
+            document.getElementById( layerId ).style.opacity = 0;
+        }
+        if ( offset > -1 * windowsHeight / 3 ) {
+            document.getElementById( layerId ).style.marginTop = offset + "px";
+        }
+    }
+
+    function animateLogo() {
+        var opacity = 100 - ( window.scrollY / 4 );
+        var offset = -50 + ( window.scrollY / 4 );
+        document.getElementById( 'logo' ).style.opacity = opacity / 100;
+        document.getElementById( 'logo' ).style.transform = "translate(50%," + offset + "%)";
+    }
+
+    function onScrollEvent( init = false ) {
+        if ( window.scrollY < ( 420 * cov / 100 ) || init ) {
+            animateLayer( "tf", -250, .7 );
+            animateLayer( "tb", 0, .6 );
+            animateLayer( "mf", 0, .4 );
+            animateLayer( "mb", 0, .2 );
+        }
+        animateMain( "main", 200, 1 );
+        animateLogo();
+    }
+</script>
+
+</html>
